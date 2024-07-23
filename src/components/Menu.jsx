@@ -12,9 +12,11 @@ import LibraryMusicIcon from '@mui/icons-material/LibraryMusic';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 const Container = styled.div`
+position: sticky;
+top:0;
 flex:2;
 background-color:black;
-height:130vh;
+height:100vh;
 color:white;
 font-size: 16px;
 `;
