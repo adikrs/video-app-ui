@@ -10,6 +10,7 @@ import SportsBaseballIcon from '@mui/icons-material/SportsBaseball';
 import HistoryIcon from '@mui/icons-material/History';
 import LibraryMusicIcon from '@mui/icons-material/LibraryMusic';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import { Link } from 'react-router-dom';
 
 const Container = styled.div`
 position: sticky;
@@ -79,6 +80,7 @@ const Title = styled.h2`
 
 const Menu = () => {
     return (
+        <Link to="/" style={{textDecoration:"none"}}>
         <Container>
             <Wrapper>
                 <Logo>
@@ -137,6 +139,7 @@ const Menu = () => {
                 </Section>
             </Wrapper>
         </Container>
+        </Link>
     )
 }
 

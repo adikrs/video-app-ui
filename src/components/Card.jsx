@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components'
+import { Link } from 'react-router-dom';
 
 
 const Container = styled.div`
@@ -50,6 +51,7 @@ font-size: 11px;
 
 const Card = () => {
     return (
+        <Link to="/video/abc" style={{textDecoration:"none"}}>
         <Container> 
             <Thumbnail src="https://theunn.com/wp-content/uploads/2024/06/Feature-and-Cover-India-Stuns-South-Africa-By-Winning-T20-World-Cup-Title.jpg"/> 
             <Details>
@@ -61,6 +63,7 @@ const Card = () => {
                 </About>
             </Details>
         </Container>
+        </Link>
     )
 }
 
