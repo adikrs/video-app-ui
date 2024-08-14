@@ -3,6 +3,8 @@ import styled from 'styled-components'
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import ThumbDownIcon from '@mui/icons-material/ThumbDown';
 import ShareIcon from '@mui/icons-material/Share';
+import Comments from '../components/Comments';
+import Card from '../components/Card';
 
 const Container = styled.div`
 display:flex;
@@ -71,6 +73,7 @@ const Hr = styled.hr`
 const UploadedBy = styled.div`
 display: flex;
 justify-content: space-between;
+margin-top: 30px;
 `;
 
 const UploaderInfo = styled.div`
@@ -81,9 +84,17 @@ gap:20;
 const UploaderImage = styled.img`
 height: 50px;
 width: 50px;
+border-radius: 50%;
 `;
 
 const Subscribe = styled.button`
+background-color: #e64141;
+font-weight:550;
+color:white;
+border-radius: 4px;
+height: max-content;
+padding: 10px 22px;
+cursor: pointer;
 `;
 
 const UploaderDetails = styled.span`
@@ -120,19 +131,36 @@ const Video = () => {
                 </Buttons>
 
             </Details>
-            <Hr/>
+            {/* <Hr/> */}
 
             <UploadedBy>
                 <UploaderInfo>
                     <UploaderImage src="https://lamhas.com/wp-content/uploads/2022/06/3-1.png"/>
+                    <UploaderDetails>
+                        <UploaderName>Star Sports - </UploaderName>
+                        <UploaderName>100k subscribers</UploaderName>
+                        <UploaderDescription>Star Sports Network is a group of Indian pay television sports channels owned by Disney Star, a subsidiary of Disney India, the channel currently holds rights of flagship tournaments like Indian Premier League, ICC Events, Premier League, ONE Championship, Wimbledon etc.</UploaderDescription>
+                    </UploaderDetails>
 
                 </UploaderInfo>
-                <Subscribe>Subscribe</Subscribe>
+                <Subscribe>SUBSCRIBE</Subscribe>
             </UploadedBy>
 
+            <Hr/>
+
+            <Comments/>
+
         </Data>
-        <SimilarContent>Similar Videos</SimilarContent>
+
+        <SimilarContent> Similar Videos
+        <Card type="small"/>
+        <Card type="small"/>
+        <Card type="small"/>
+        <Card type="small"/>
+        <Card type="small"/>
+        </SimilarContent>
        </Container>
+
     )
 }
 
