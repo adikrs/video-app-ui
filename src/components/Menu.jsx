@@ -69,6 +69,10 @@ const Section = styled.div`
     cursor: pointer;
     align-items: center;
     padding: 14px;
+
+    &:hover{
+        background-color: #c1c1c1;
+    }
 `;
 
 const Title = styled.h2`
@@ -88,8 +92,14 @@ const Menu = () => {
                         Video-APP
                 </Logo>
 
-                <SignIn> Sign in below to browse more!</SignIn>
-                <Button> <AccountCircleIcon/> Sign In</Button>
+                <SignIn> Sign in below to browse more!
+                <Link to="signIn" style={{textDecoration:"none"}}>
+                <Button> 
+                    <AccountCircleIcon/>
+                    Sign In
+                </Button>
+                </Link>
+                </SignIn>
 
                 <Hrblock/>
                 <Title>Fun Sections!</Title>
