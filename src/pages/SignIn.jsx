@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components'
 import Card from '../components/Card';
+import { useState } from 'react';
+import axios from 'axios';
 
 
 const Container = styled.div`
@@ -45,23 +47,41 @@ font-weight: 450px;
 cursor: pointer;
 `;
 
-
-
-
 const SignIn = () => {
+
+    const [username, setUserName] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+
+    const loginHandler = async (e) => {
+        e.preventDefault();
+
+        //request
+        try{
+            const res = await axios.post("/auth/login", {username,password})
+            console.log(res.data);
+        }
+        catch(err)
+        {
+            console.log(err);
+        }
+    }
+
     return (
        <Container>
         <Wrapper>
 
             <Title> Sign In</Title>
             <SubTitle>to view the application</SubTitle>
-            <Input placeholder='username'></Input>
-            <Input type="password" placeholder='password'></Input>
-            <Button> Click to sign in</Button>
+            <Input placeholder='username' onChange={e=>setUserName(e.target.value)}></Input>
+            <Input type="password" placeholder='password' onChange={e=>setPassword(e.target.value)}></Input>
+
+            <Button onClick={loginHandler}> Click to sign in</Button>
+
             <Title> or </Title>
-            <Input placeholder='username'></Input>
-            <Input placeholder='email'></Input>
-            <Input type="password" placeholder='password'></Input>
+            <Input placeholder='username' onChange={e=>setUserName(e.target.value)}></Input>
+            <Input placeholder='email' onChange={e=>setEmail(e.target.value)}></Input>
+            <Input type="password" placeholder='password' onChange={e=>setPassword(e.target.value)}></Input>
             <Button> Click to SignUp/Register</Button>
 
         </Wrapper>
