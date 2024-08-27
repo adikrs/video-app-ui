@@ -1,7 +1,9 @@
 import React from 'react';
 import styled from 'styled-components'
 import { Link } from 'react-router-dom';
-
+import {format} from 'timeago.js'
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 
 const Container = styled.div`
 width: ${(props)=>props.type !=="small" && "350px"}; 
@@ -53,17 +55,32 @@ font-size: 11px;
 
 
 
-const Card = ({type}) => {
+const Card = ({type,video}) => {
+
+    const [channel,setChannel] = useState({});
+    useEffect(()=> {
+        const fetchUploader = async () => {
+            const res = await axios.get(`/users/find/${video.userId}`)
+            setChannel(res.data)
+            // console.log(res.data);
+            // console.log(channel);
+            // console.log("hi channel");
+        }
+        fetchUploader()
+    },[video.userId])
+
+    // src={channel?.img}
+
     return (
         <Link to="/video/abc" style={{textDecoration:"none"}}>
         <Container type={type}> 
-            <Thumbnail type={type} src="https://theunn.com/wp-content/uploads/2024/06/Feature-and-Cover-India-Stuns-South-Africa-By-Winning-T20-World-Cup-Title.jpg"/> 
+            <Thumbnail type={type} src={video.imageUrl}/> 
             <Details type={type}>
                 <Icon type={type}  src="https://lamhas.com/wp-content/uploads/2022/06/3-1.png"/>
                 <About>
-                    <Title> Sports World Cup Video</Title>
-                    <UploadedBy>Star Sports</UploadedBy>
-                    <Info> 2 hrs ago ... 1M Views </Info>
+                    <Title> {video.title} </Title>
+                    <UploadedBy> {channel?.name} </UploadedBy>
+                    <Info> {format(video.createdAt)} --- {video.views} views </Info>
                 </About>
             </Details>
         </Container>

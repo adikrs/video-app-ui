@@ -1,6 +1,9 @@
 import React from 'react';
+import { useEffect } from 'react';
 import styled from 'styled-components'
 import Card from '../components/Card';
+import axios from 'axios'
+import { useState } from 'react';
 
 
 const Container = styled.div`
@@ -10,8 +13,25 @@ justify-content: space-between;
 `;
 
 const Home = () => {
+
+    const [videos,setVideos]  = useState([])
+
+    useEffect(()=> {
+        const fetchVideos = async () => {
+            const res = await axios.get("/videos/find/")
+            setVideos(res.data)
+            // console.log(res);
+            // console.log("hi hi");
+        }
+        fetchVideos()
+    },[])
+
     return (
        <Container>
+        {videos.map((video) => (
+            <Card  key={video._id} video={video} />
+        ))}
+        {/* <Card/>
         <Card/>
         <Card/>
         <Card/>
@@ -32,8 +52,7 @@ const Home = () => {
         <Card/>
         <Card/>
         <Card/>
-        <Card/>
-        <Card/>
+        <Card/> */}
        </Container>
     )
 }
