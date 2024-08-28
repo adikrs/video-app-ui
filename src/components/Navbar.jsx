@@ -3,6 +3,9 @@ import styled from 'styled-components'
 import SearchIcon from '@mui/icons-material/Search';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import VideoLibraryIcon from '@mui/icons-material/VideoLibrary';
+import { logout } from '../redux/userSlice';
 
 const Container = styled.div`
 top:0;
@@ -54,9 +57,44 @@ align-items: center;
 font-weight: 600;
 `
 
+const User = styled.div`
+display: flex;
+align-items: center;
+font-weight: 550;
+gap:12px;
+
+`
+
+const Avatar = styled.img`
+width :30px;
+height: 30px;
+border-radius: 60%;
+background-color: grey;
+`;
 
 
 const Navbar = () => {
+
+    const currentUser =  useSelector(state=>state.user)
+
+    // const logoutHandler = async (e) => {
+    //     e.preventDefault();
+    
+    //     dispatch(logout())
+    //     //request
+    //     try{
+    //         const res = await axios.post("/auth/login", {username,password})
+    //         // console.log(res.data);
+    //         dispatch(signInSuccess(res.data))
+    //     }
+    //     catch(err)
+    //     {
+    //         console.log(err);
+    //         dispatch(signInFailure())
+    //     }
+    // }
+
+
     return (
         // <div>Navbar</div>
         <Container>
@@ -66,12 +104,21 @@ const Navbar = () => {
                     Search
                     <SearchIcon/>
                 </Search>
-                <Link to="signIn" style={{textDecoration:"none"}}>
+
+                { (currentUser && currentUser.user) ? 
+                (<User>
+                    <Button> SIGN OUT</Button>  
+                    <VideoLibraryIcon/>
+                    <Avatar/>
+                    { currentUser.user.name}
+                </User>) :
+                (<Link to="signIn" style={{textDecoration:"none"}}>
                 <Button>
                     <AccountCircleIcon/>
-                     SIGN IN!
+                    SIGN IN!
                 </Button>
-                </Link>
+                </Link>)
+                }
             </Wrapper>
         </Container>
     )

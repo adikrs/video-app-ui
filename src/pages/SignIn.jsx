@@ -3,6 +3,8 @@ import styled from 'styled-components'
 import Card from '../components/Card';
 import { useState } from 'react';
 import axios from 'axios';
+import { signInStart, signInFailure, signInSuccess } from '../redux/userSlice';
+import { useDispatch } from 'react-redux';
 
 
 const Container = styled.div`
@@ -52,18 +54,22 @@ const SignIn = () => {
     const [username, setUserName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const dispatch = useDispatch()
 
     const loginHandler = async (e) => {
         e.preventDefault();
 
+        dispatch(signInStart())
         //request
         try{
             const res = await axios.post("/auth/login", {username,password})
-            console.log(res.data);
+            // console.log(res.data);
+            dispatch(signInSuccess(res.data))
         }
         catch(err)
         {
             console.log(err);
+            dispatch(signInFailure())
         }
     }
 

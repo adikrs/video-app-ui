@@ -11,6 +11,7 @@ import HistoryIcon from '@mui/icons-material/History';
 import LibraryMusicIcon from '@mui/icons-material/LibraryMusic';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const Container = styled.div`
 position: sticky;
@@ -83,6 +84,8 @@ const Title = styled.h2`
 `
 
 const Menu = () => {
+    const currentUser =  useSelector(state=>state.user)
+
     return (
         <Link to="/" style={{textDecoration:"none"}}>
         <Container>
@@ -92,7 +95,10 @@ const Menu = () => {
                         Video-APP
                 </Logo>
 
+                { !(currentUser && currentUser.user) &&
+                (
                 <SignIn> Sign in below to browse more!
+
                 <Link to="signIn" style={{textDecoration:"none"}}>
                 <Button> 
                     <AccountCircleIcon/>
@@ -100,6 +106,8 @@ const Menu = () => {
                 </Button>
                 </Link>
                 </SignIn>
+                )
+                }
 
                 <Hrblock/>
                 <Title>Fun Sections!</Title>
