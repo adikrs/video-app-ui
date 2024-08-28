@@ -6,6 +6,9 @@ import axios from 'axios';
 import { signInStart, signInFailure, signInSuccess } from '../redux/userSlice';
 import { useDispatch } from 'react-redux';
 
+import { auth, provider } from '../firebase'
+import { signInWithPopup } from 'firebase/auth';
+
 
 const Container = styled.div`
 display:flex;
@@ -73,6 +76,25 @@ const SignIn = () => {
         }
     }
 
+
+    const googleLoginHandler = async (e) => {
+        e.preventDefault();
+
+        dispatch(signInStart())
+        //request
+        try{
+            const res = await axios.post("/auth/login", {username,password})
+            // console.log(res.data);
+            dispatch(signInSuccess(res.data))
+        }
+        catch(err)
+        {
+            console.log(err);
+            dispatch(signInFailure())
+        }
+    }
+
+
     return (
        <Container>
         <Wrapper>
@@ -85,6 +107,12 @@ const SignIn = () => {
             <Button onClick={loginHandler}> Click to sign in</Button>
 
             <Title> or </Title>
+
+            {/* google login */}
+            <Button onClick={googleLoginHandler}> Google Sign In</Button>
+
+            <Title> or </Title>
+
             <Input placeholder='username' onChange={e=>setUserName(e.target.value)}></Input>
             <Input placeholder='email' onChange={e=>setEmail(e.target.value)}></Input>
             <Input type="password" placeholder='password' onChange={e=>setPassword(e.target.value)}></Input>

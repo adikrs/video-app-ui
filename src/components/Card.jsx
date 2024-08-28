@@ -60,11 +60,17 @@ const Card = ({type,video}) => {
     const [channel,setChannel] = useState({});
     useEffect(()=> {
         const fetchUploader = async () => {
-            const res = await axios.get(`/users/find/${video.userId}`)
-            setChannel(res.data)
-            // console.log(res.data);
-            // console.log(channel);
-            // console.log("hi channel");
+            try{
+                const res = await axios.get(`/users/find/${video.userId}`)
+                setChannel(res.data)
+                // console.log(res.data);
+                // console.log(channel);
+                // console.log("hi channel");
+            }
+            catch(err)
+            {
+                console.log(err)
+            }
         }
         fetchUploader()
     },[video.userId])

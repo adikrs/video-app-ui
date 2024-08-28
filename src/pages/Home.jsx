@@ -18,10 +18,16 @@ const Home = () => {
 
     useEffect(()=> {
         const fetchVideos = async () => {
-            const res = await axios.get("/videos/find/")
-            setVideos(res.data)
-            // console.log(res);
-            // console.log("hi hi");
+            try{
+                const res = await axios.get("/videos/find/")
+                setVideos(res.data)
+                // console.log(res);
+                // console.log("hi hi");
+            }
+            catch(err)
+            {
+                console.log(err);
+            }
         }
         fetchVideos()
     },[])
